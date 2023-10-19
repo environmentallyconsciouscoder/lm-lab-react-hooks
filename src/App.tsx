@@ -8,10 +8,14 @@ import { Focus } from './components/hooks/use_ref/focus';
 import { CountCats } from './components/hooks/use_state/count_cats';
 // import { TaskApp } from './components/hooks/use_reducer/todo_app';
 import { Section } from './components/section';
+// import { createContext, useContext } from 'react';
+
+// export const ThemeContext = createContext('');
 
 function App() {
 	return (
-		<>
+		// <ThemeContext.Provider value="dark">
+			<>
 			<div className='App'>
 
 				<Section>
@@ -44,7 +48,8 @@ function App() {
 					{/* <TaskApp /> */}
 				</Section>
 			</div>
-		</>
+			</>
+		// </ThemeContext.Provider>
 	);
 }
 
