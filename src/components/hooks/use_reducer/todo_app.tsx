@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useReducer, useState } from 'react';
 import { AddTask } from './add_task.js';
 import { TaskList } from './task_list.js';
+import tasksReducer from './tasksReducer.js';
 
 export interface Task {
 	id: number;
@@ -14,34 +15,51 @@ const initialTasks: Task[] = [
 	{ id: 2, text: 'Lennon Wall pic', done: false },
 ];
 
+let nextId = 3;
+
 export function TaskApp() {
-	const [tasks, setTasks] = useState(initialTasks);
+	// const [tasks, setTasks] = useState(initialTasks);
+	const [tasks, dispatch] = useReducer(tasksReducer, initialTasks);
+
 
 	function handleAddTask(text: string) {
-		setTasks([
-			...tasks,
-			{
-				id: tasks.length,
-				text: text,
-				done: false,
-			},
-		]);
+		dispatch({
+			type: 'added',
+			id: nextId++,
+			text: text,
+		});
+		// setTasks([
+		// 	...tasks,
+		// 	{
+		// 		id: tasks.length,
+		// 		text: text,
+		// 		done: false,
+		// 	},
+		// ]);
 	}
 
 	function handleChangeTask(updatedTask: Task) {
-		setTasks(
-			tasks.map((t) => {
-				if (t.id === updatedTask.id) {
-					return updatedTask;
-				} else {
-					return t;
-				}
-			})
-		);
+		dispatch({
+			type: 'changed',
+			task: updatedTask,
+		});
+		// setTasks(
+		// 	tasks.map((t) => {
+		// 		if (t.id === updatedTask.id) {
+		// 			return updatedTask;
+		// 		} else {
+		// 			return t;
+		// 		}
+		// 	})
+		// );
 	}
 
 	function handleDeleteTask(taskId: number) {
-		setTasks(tasks.filter((t) => t.id !== taskId));
+		dispatch({
+			type: 'deleted',
+			id: taskId,
+		});
+		// setTasks(tasks.filter((t) => t.id !== taskId));
 	}
 
 	return (
