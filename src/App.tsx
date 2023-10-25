@@ -6,15 +6,12 @@ import { Todo } from './components/hooks/use_x/todo';
 import { CountRenders } from './components/hooks/use_ref/count_renders';
 import { Focus } from './components/hooks/use_ref/focus';
 import { CountCats } from './components/hooks/use_state/count_cats';
-// import { TaskApp } from './components/hooks/use_reducer/todo_app';
+import { TaskApp } from './components/hooks/use_reducer/todo_app';
 import { Section } from './components/section';
 // import { createContext, useContext } from 'react';
 
-// export const ThemeContext = createContext('');
-
 function App() {
 	return (
-		// <ThemeContext.Provider value="dark">
 			<>
 			<div className='App'>
 
@@ -45,11 +42,10 @@ function App() {
 
 				<Section>
 					This is an extension!
-					{/* <TaskApp /> */}
+					<TaskApp />
 				</Section>
 			</div>
 			</>
-		// </ThemeContext.Provider>
 	);
 }
 
