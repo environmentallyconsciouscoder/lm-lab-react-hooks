@@ -7,7 +7,15 @@ interface Task {
 
 type Actions = 'added' | 'changed' | 'deleted';
 
-export default function tasksReducer(tasks: any[], action: any) {
+type Action = {
+  type: Actions;
+} & (
+  | { type: 'added'; id: number; text: string }
+  | { type: 'changed'; task: Task }
+  | { type: 'deleted'; id: number }
+);
+
+export default function tasksReducer(tasks: Task[], action: Action) {
     switch (action.type) {
       case 'added': {
         return [
@@ -30,9 +38,6 @@ export default function tasksReducer(tasks: any[], action: any) {
       }
       case 'deleted': {
         return tasks.filter((t) => t.id !== action.id);
-      }
-      default: {
-        throw Error('Unknown action: ' + action.type);
       }
     }
   }
