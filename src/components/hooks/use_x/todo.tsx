@@ -1,37 +1,40 @@
 import { useEffect, useState } from 'react';
 import { isError } from '../../../helpers/is_error';
+import useFetch from './use_todo';
 
 /** This is the response that TypiCode gives for the /todos/ endpoint */
-interface TodoResponse {
-	userId: number;
-	id: number;
-	title: string;
-	completed: boolean;
-}
+// interface TodoResponse {
+// 	userId: number;
+// 	id: number;
+// 	title: string;
+// 	completed: boolean;
+// }
 
 export const Todo = () => {
-	const [data, setData] = useState<TodoResponse>();
-	const [isFetching, setIsFetching] = useState(true);
+	const {data, isFetching} = useFetch("https://jsonplaceholder.typicode.com/todos/1");
 
-	const url = 'https://jsonplaceholder.typicode.com/todos/1';
+	// const [data, setData] = useState<TodoResponse>();
+	// const [isFetching, setIsFetching] = useState(true);
 
-	useEffect(() => {
-		const fetchData = async () => {
-			try {
-				const response = await fetch(url);
-				setIsFetching(false);
-				if (response.status === 200) {
-					const json = await response.json();
-					setData(json);
-				}
-			} catch (e: unknown) {
-				setIsFetching(false);
+	// const url = 'https://jsonplaceholder.typicode.com/todos/1';
 
-				console.log(isError(e) ? e.message : 'Unknown error!');
-			}
-		};
-		fetchData();
-	}, [url]);
+	// useEffect(() => {
+	// 	const fetchData = async () => {
+	// 		try {
+	// 			const response = await fetch(url);
+	// 			setIsFetching(false);
+	// 			if (response.status === 200) {
+	// 				const json = await response.json();
+	// 				setData(json);
+	// 			}
+	// 		} catch (e: unknown) {
+	// 			setIsFetching(false);
+
+	// 			console.log(isError(e) ? e.message : 'Unknown error!');
+	// 		}
+	// 	};
+	// 	fetchData();
+	// }, [url]);
 
 	return (
 		<>
