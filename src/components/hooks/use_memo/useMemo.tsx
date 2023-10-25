@@ -1,12 +1,18 @@
 import { useState } from 'react';
+import { useMemo } from 'react';
 
 export const MemoExample = () => {
 
 	console.log("Rendering component...")
 
 	const [numberObj, setNumberObj] = useState({ input: 0 });
-	
-	const doubleNumber = slowFunction(numberObj.input)
+
+	// const doubleNumber = slowFunction(numberObj.input)
+
+	const doubleNumber = useMemo(
+		() => slowFunction(numberObj.input),
+		[numberObj]
+	);
 
 	return (
 		<>
