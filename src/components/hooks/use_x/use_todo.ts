@@ -1,15 +1,20 @@
 import { useState, useEffect } from "react";
 import { isError } from '../../../helpers/is_error';
 
-interface TodoResponse {
-	userId: number;
-	id: number;
-	title: string;
-	completed: boolean;
-}
+// useFetch:
+// In the process of making useTodo more flexible, I encourage the use of type generics.
+// In this case we'd move TodoResponse into the component that's calling our custom hook, and update useFetch to accept a generic type.
 
-const useFetch = (url: string) => {
-	const [data, setData] = useState<TodoResponse>();
+// For example:
+// export const useFetch = <T>(url: string) => { const [data, setData] = useState<T>();
+
+// and then use your specific type when you call it:
+// const { data, isFetching } = useFetch<TodoResponse>(url);
+
+// Now useFetch has the flexibility to make calls beyond the limitations of TodoResponse type.
+
+const useFetch = <T>(url: string) => {
+	const [data, setData] = useState<T>();
 	const [isFetching, setIsFetching] = useState(true);
 
 	useEffect(() => {
