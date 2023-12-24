@@ -5,17 +5,23 @@ interface Task {
 	done: boolean;
 }
 
-type Actions = 'added' | 'changed' | 'deleted';
+// type Actions = 'added' | 'changed' | 'deleted';
 
-type Action = {
-  type: Actions;
-} & (
-  | { type: 'added'; id: number; text: string }
-  | { type: 'changed'; task: Task }
-  | { type: 'deleted'; id: number }
-);
+type AddTask = { type: "added", id: number; text: string }
+type ChangeTask = { type: "changed", task: Task }
+type DeleteTask = { type: "deleted", id: number }
 
-export default function tasksReducer(tasks: Task[], action: Action) {
+// type Action = {
+//   type: Actions;
+// } & (
+//   | AddTask
+//   | ChangeTask
+//   | DeleteTask
+// );
+
+type ReducerActionType = AddTask | ChangeTask | DeleteTask
+
+export default function tasksReducer(tasks: Task[], action: ReducerActionType) {
     switch (action.type) {
       case 'added': {
         return [
