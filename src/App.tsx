@@ -32,7 +32,7 @@ function App() {
 
 				<Section>
 					<CountRenders />
-					<Focus/>
+					{/* <Focus/> */}
 				</Section>
 
 				<Section>

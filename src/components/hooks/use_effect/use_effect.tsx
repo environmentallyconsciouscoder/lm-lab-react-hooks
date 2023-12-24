@@ -23,7 +23,7 @@ export const APICall = () => {
     }, []);
 
     useEffect(() => {
-        console.log("new results", results);
+        // console.log("new results", results);
     }, [results]);
 
     return (
